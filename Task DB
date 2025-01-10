@@ -1,0 +1,19 @@
+-- Create the database for the task manager
+CREATE DATABASE TaskManager;
+
+-- Use the database
+USE TaskManager;
+
+-- Create a table for tasks
+CREATE TABLE Tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,   -- Unique ID for each task
+    task_name VARCHAR(255) NOT NULL,      -- The task name
+    is_completed BOOLEAN DEFAULT FALSE,  -- Boolean to track whether the task is completed
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp for when the task is created
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for last update
+);
+
+-- Example: Insert some initial tasks
+INSERT INTO Tasks (task_name) VALUES ('Finish homework');
+INSERT INTO Tasks (task_name) VALUES ('Read book');
+INSERT INTO Tasks (task_name) VALUES ('Buy groceries');
