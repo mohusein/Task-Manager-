@@ -1,0 +1,84 @@
+import React, { useState } from 'react';
+
+function TaskManager() {
+  const [task, setTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+  
+  const handleAddTask = () => {
+    if (task.trim()) {
+      setTasks([...tasks, task]);
+      setTask('');
+    }
+  };
+
+  const handleRemoveTask = (index) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+  };
+
+  return (
+    <div className="task-manager">
+      <h1>Task Manager</h1>
+      <input
+        type="text"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+        placeholder="Enter your task"
+      />
+      <button onClick={handleAddTask}>Add Task</button>
+      
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>
+            {task}
+            <button onClick={() => handleRemoveTask(index)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+
+      <style jsx>{`
+        .task-manager {
+          font-family: Arial, sans-serif;
+          padding: 20px;
+          max-width: 400px;
+          margin: 0 auto;
+          background-color: #f4f4f4;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+          text-align: center;
+        }
+        input {
+          width: 80%;
+          padding: 8px;
+          margin-bottom: 10px;
+        }
+        button {
+          padding: 8px 12px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #45a049;
+        }
+        ul {
+          list-style-type: none;
+          padding-left: 0;
+        }
+        li {
+          display: flex;
+          justify-content: space-between;
+          background-color: #fff;
+          margin: 5px 0;
+          padding: 10px;
+          border-radius: 5px;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+export default TaskManager;
